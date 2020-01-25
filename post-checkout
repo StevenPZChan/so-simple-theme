@@ -1,0 +1,8 @@
+#!/bin/sh
+GIT_DIR=`git rev-parse --show-toplevel`
+echo $GIT_DIR
+cd $GIT_DIR || exit 1
+echo Preparing...
+chmod +x prepare.sh && ./prepare.sh
+echo Preparation done!
+

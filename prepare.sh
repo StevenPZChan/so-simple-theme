@@ -3,21 +3,30 @@ icons=("android-chrome-72x72.png" "apple-touch-icon.png" "browserconfig.xml" "fa
 pages=("404.md" "categories.md" "tags.md")
 dirs=("assets" "_data" "_includes" "_layouts" "_sass")
 
-# link icons
+# copy icons
 for icon in ${icons[@]}; do
-    ln -rsf $icon ../$icon
+    cp -rldf $icon ../$icon
 done
+
 # link pages
 for page in ${pages[@]}; do
     ln -rsf $page ../$page
 done
-# link images
-for image in `ls images/`; do
-    ln -rsf images/$image ../images/$image
-done
-exit 0
-# link directories
+
+# copy images
+cp -rldf images/ ../
+
+# copy directories
 for dir in ${dirs[@]}; do
-    ln -rsf $dir/ ../$dir
+    [ -d ../$dir ] && rm -rf ../$dir
+    cp -rldf $dir ../
 done
+[ -f "../navigation.yml" ] && cp -rldf ../navigation.yml ../_data/navigation.yml
+
+# concatenate config
+cp -rf _config.yml ../_config.yml
+[ -f "../config.yml" ] && cat ../config.yml >> ../_config.yml
+
+# gemspec
+cp -rldf Gemfile jekyll-theme-so-simple.gemspec ../
 
