@@ -3,9 +3,6 @@ pages=("404.md" "categories.md" "tags.md")
 theme_dirs=("assets" "_includes" "_layouts" "_sass")
 custom_files=("_includes/head-custom.html" "_layouts/post.html" "_sass/*")
 
-# extract icons
-unzip -uo favicon_package_v0.16 -d ../
-
 # link pages
 for page in ${pages[@]}; do
     ln -rsf $page ../$page
