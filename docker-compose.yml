@@ -1,0 +1,21 @@
+services:
+  jekyll:
+    image: jekyll/jekyll:stable
+    volumes:
+      - .:/srv/jekyll:Z
+      - ./vendor/bundle:/usr/local/bundle:Z
+    environment:
+      - JEKYLL_ROOTLESS=1
+      - JEKYLL_DEBUG=1
+      - VERBOSE=1
+      - FORCE_POLLING=1
+      - JEKYLL_LOG_LEVEL=debug
+    ports:
+      - 4000:4000
+    command: jekyll serve --incremental --watch --force_polling --verbose
+  bundle-config:
+    image: jekyll/jekyll:stable
+    volumes:
+      - .:/srv/jekyll:Z
+      - ./vendor/bundle:/usr/local/bundle:Z
+    command: bundle config mirror.https://rubygems.org https://mirrors.tuna.tsinghua.edu.cn/rubygems
